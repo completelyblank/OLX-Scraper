@@ -1,17 +1,34 @@
 import tkinter as tk
 from tkinter import ttk
 from bs4 import BeautifulSoup
-import pandas as pd
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
+# Your Chrome version:
+chrome_version = "122.0.6261.69"
+
+# Define the lists outside the function
+date_posted = []
+describe = []
+price = []
+location = []
+
 def scrape_data():
+    # Use global keyword to access global variables
+    global date_posted, describe, price, location
+
     date_posted.clear()
     describe.clear()
     price.clear()
     location.clear()
 
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    chrome_options = Options()
+    # chrome_options.add_argument('--headless')  # Add this line if you don't want to open a visible browser window
+
+    # Specify ChromeDriver version
+    chrome_driver_version = f"{chrome_version}.0"
+    driver = webdriver.Chrome(ChromeDriverManager(version=chrome_driver_version).install(), options=chrome_options)
     driver.get("https://www.olx.com.pk/cats_c138/q-cats")
 
     content = driver.page_source
@@ -34,7 +51,7 @@ def scrape_data():
     update_gui()
 
 def update_gui():
-    tree.delete(*tree.get_children())  # Clear the treeview
+    tree.delete(*tree.get_children())
     for i, (date, desc, pr, loc) in enumerate(zip(date_posted, describe, price, location), 1):
         tree.insert("", "end", values=(i, date, desc, pr, loc))
 
