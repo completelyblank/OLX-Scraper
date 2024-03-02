@@ -1,3 +1,7 @@
+<img width="960" alt="olx" src="https://github.com/completelyblank/OLX-Scraper/assets/105001837/f0bde0e0-ce06-4972-badc-4288ede79e41">
+
+
+
 # Olx Webscraper
 
 This web scraper is designed to extract information about cats being sold on a famous Pakistani website similar to eBay. The scraper collects details such as the title of the selling item, its price, location, time, and description, and converts this information into a CSV file for further analysis or use.
